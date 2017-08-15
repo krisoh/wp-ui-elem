@@ -30,6 +30,10 @@ class wp_ui_elements {
         //include page with options
         require_once dirname( __FILE__ ) . '/options.php';
 
+        require_once dirname( __FILE__ ) . '/bootstrap4-elements/register_bs4_elements.php';
+
+        new register_bs4_elements();
+
     }
 
     private static function hooks() {

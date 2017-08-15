@@ -1,42 +1,72 @@
 (function () {
   tinymce.PluginManager.add('wp_ui_bootstrap', function(editor, url) {
+
     editor.addButton('wp_ui_bootstrap', {
-      icon: false,
+      icon: true,
+      image: url+'/img/bootstrap4.jpg',
       type: 'listbox',
-      text: 'wpBoot',
+      text: 'Bootsrap 4',
 
       onselect: function (e) {
 
         switch (this.value()) {
-          case "callout":
-            openCalloutShortcode(editor)
+          case "alerts":
+            openAlertsShortcode(editor)
             break;
-          case "button":
-            openButtonShortcode(editor)
+          case "badge":
+            openBadgeShortcode(editor)
             break
-          case "section":
-            openSectionShortcode(editor)
+          case "breadcrumbs":
+            openBreadcrumbsShortcode(editor)
             break
+          case "buttonGroup":
+            openButtonGroupShortcode(editor)
+            break;
+          case "buttons":
+            openButtonsShortcode(editor)
+            break;
           case "card":
             openCardShortcode(editor)
+            break;
+          case "carousel":
+            openCarouselShortcode(editor)
+            break;
+          case "dropdown":
+            openDropdownShortcode(editor)
+            break;
+          case "jumbotron":
+            openJumbotronShortcode(editor)
+            break;
+          case "modal":
+            openModalShortcode(editor)
+            break;
+          case "popover":
+            openPopoverShortcode(editor)
             break;
         }
 
       },
       values: [
-        { text: 'Callout', value: 'callout' },
-        { text: 'Button', value: 'button' },
-        { text: 'Section', value: 'section' },
-        { text: 'Card', value: 'card' }
+        { text: 'Alerts', value: 'alerts' },
+        { text: 'Badge', value: 'badge' },
+        { text: 'Breadcrumbs', value: 'breadcrumbs' },
+        { text: 'Button Group', value: 'buttonGroup' },
+        { text: 'Buttons', value: 'buttons' },
+        { text: 'Card', value: 'card' },
+        { text: 'Carousel', value: 'carousel' },
+        { text: 'Dropdown', value: 'dropdown' },
+        { text: 'Jumbotron', value: 'jumbotron' },
+        { text: 'Modal', value: 'modal' },
+        { text: 'Popover', value: 'popover' }
       ]
 
     });
 
   });
 
-  function openButtonShortcode(editor){
+  function openAlertsShortcode(editor){
     editor.windowManager.open({
-      title: 'App-Arena Button',
+      title: 'App-Arena Alert',
       body: [
         {type: 'textbox', name: 'title', label: 'Text'},
         {type: 'textbox', name: 'link_url', label: 'Link Url'},
@@ -64,8 +94,7 @@
 
       ],
       onsubmit: function(e) {
-        // Insert content when the window form is submitted
-        console.log(e.data.color)
+
         const shortcode='[aa_button color="'+e.data.color+'" size="'+e.data.size+'" link_url="'+e.data.link_url+'" target="'+e.data.target+'" ]'+e.data.title+'[/aa_button]'
         editor.insertContent(shortcode);
       }

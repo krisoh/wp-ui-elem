@@ -1,9 +1,10 @@
 (function () {
   tinymce.PluginManager.add('wp_ui_semantic', function(editor, url) {
     editor.addButton('wp_ui_semantic', {
-      icon: false,
+      icon: true,
+      image: url+'/img/semantic.png',
       type: 'listbox',
-      text: 'wpSemantic',
+      text: 'Semantic-Ui',
 
       onselect: function (e) {
 
