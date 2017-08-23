@@ -1,7 +1,7 @@
 (function () {
-  tinymce.PluginManager.add('wp_ui_bootstrap', function(editor, url) {
+  tinymce.PluginManager.add('wp_ui_bootstrap_4', function(editor, url) {
 
-    editor.addButton('wp_ui_bootstrap', {
+    editor.addButton('wp_ui_bootstrap_4', {
       icon: true,
       image: url+'/img/bootstrap4.jpg',
       type: 'listbox',

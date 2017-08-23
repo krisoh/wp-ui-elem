@@ -28,7 +28,7 @@ class wp_ui_elements {
     private static function includes() {
 
         //include page with options
-        require_once dirname( __FILE__ ) . '/options.php';
+        require_once dirname(__FILE__) . '/options.php';
 
         require_once dirname( __FILE__ ) . '/bootstrap4-elements/register_bs4_elements.php';
 
@@ -51,14 +51,23 @@ class wp_ui_elements {
     }
 
     public static function  wp_ui_register_tinymce_button( $buttons ) {
-        array_push( $buttons, "wp_ui_semantic" );
-        array_push( $buttons, "wp_ui_bootstrap" );
+        $options = get_option( 'wpui_options' );
+
+        if (isset($options['semanitcUi_chekbox'])){
+            array_push( $buttons, "wp_ui_semantic" );
+        }
+        if (isset($options['bootstrap4_chekbox'])) {
+            array_push( $buttons, "wp_ui_bootstrap_4" );
+        }
+
+
+
         return $buttons;
     }
 
     public static function  wp_ui_add_tinymce_button( $plugin_array ) {
         $plugin_array['wp_ui_semantic'] = plugins_url( '/src/js', __FILE__ ).'/wp_ui_semantic_plugin.js' ;
-        $plugin_array['wp_ui_bootstrap'] = plugins_url( '/src/js', __FILE__ ).'/wp_ui_bootstrap4_plugin.js' ;
+        $plugin_array['wp_ui_bootstrap_4'] = plugins_url( '/src/js', __FILE__ ).'/wp_ui_bootstrap4_plugin.js' ;
         return $plugin_array;
     }
 
