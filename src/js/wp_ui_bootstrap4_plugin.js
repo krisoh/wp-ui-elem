@@ -10,7 +10,7 @@
       onselect: function (e) {
 
         switch (this.value()) {
-          case "alerts":
+          case "buttons":
             openAlertsShortcode(editor)
             break;
           case "badge":
@@ -47,7 +47,7 @@
 
       },
       values: [
-        { text: 'Alerts', value: 'alerts' },
+        { text: 'Alerts', value: 'buttons' },
         { text: 'Badge', value: 'badge' },
         { text: 'Breadcrumbs', value: 'breadcrumbs' },
         { text: 'Button Group', value: 'buttonGroup' },

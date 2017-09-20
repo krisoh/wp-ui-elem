@@ -2,19 +2,19 @@
   tinymce.PluginManager.add('wp_ui_semantic', function(editor, url) {
     editor.addButton('wp_ui_semantic', {
       icon: true,
-      image: url+'/img/semantic.png',
+      image: url+'/../img/semantic.png',
       type: 'listbox',
       text: 'Semantic-Ui',
 
       onselect: function (e) {
 
         switch (this.value()) {
+          case "button":
+            openButtonShortcode(editor,url)
+            break
           case "callout":
             openCalloutShortcode(editor)
             break;
-          case "button":
-            openButtonShortcode(editor)
-            break
           case "section":
             openSectionShortcode(editor)
             break
@@ -25,8 +25,8 @@
 
       },
       values: [
-        { text: 'Callout', value: 'callout' },
         { text: 'Button', value: 'button' },
+        { text: 'Callout', value: 'callout' },
         { text: 'Section', value: 'section' },
         { text: 'Card', value: 'card' }
       ]
@@ -35,41 +35,13 @@
 
   });
 
-  function openButtonShortcode(editor){
+  function openButtonShortcode(editor,url){
+    console.log(tinymce);
     editor.windowManager.open({
-      title: 'App-Arena Button',
-      body: [
-        {type: 'textbox', name: 'title', label: 'Text'},
-        {type: 'textbox', name: 'link_url', label: 'Link Url'},
-        {type:'listbox', name: 'color',label: 'Color', values:[
-          { text: 'Primary', value: 'primary' },
-          { text: 'Success', value: 'success' },
-          { text: 'Info', value: 'info' },
-          { text: 'Warning', value: 'warning' },
-          { text: 'Danger', value: 'danger' },
-        ] },
-        {type:'listbox', name: 'size',label: 'Size', values:[
-          { text: 'Default', value: ' ' },
-          { text: 'Large', value: 'lg' },
-          { text: 'Small', value: 'sm' },
-          { text: 'XSmall', value: 'xs' }
-
-        ] },
-        {type:'listbox', name: 'target',label: 'Target', values:[
-          { text: '_blank', value: '_blank' },
-          { text: '_self', value: '_self' },
-          { text: '_parent', value: '_parent' },
-          { text: '_top', value: '_top' }
-        ] }
-
-
-      ],
-      onsubmit: function(e) {
-        // Insert content when the window form is submitted
-        console.log(e.data.color)
-        const shortcode='[aa_button color="'+e.data.color+'" size="'+e.data.size+'" link_url="'+e.data.link_url+'" target="'+e.data.target+'" ]'+e.data.title+'[/aa_button]'
-        editor.insertContent(shortcode);
-      }
+      title: 'Semantic UI Button plugin',
+      url: url+'/../templates/semanticUi/buttons.php',
+      width: 900,
+      height: 550
     });
   }
 

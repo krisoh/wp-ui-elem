@@ -17,4 +17,4 @@ function alerts_template($options,$content){
 
 }
 
-add_shortcode( 'bs4Alerts', 'alerts_template' );
+add_shortcode( 'bs4Alerts', 'alerts_shortcode' );

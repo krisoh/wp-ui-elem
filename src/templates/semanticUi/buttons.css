@@ -1,0 +1,16 @@
+.btn_accordion{
+    position: fixed;
+    height: 100%;
+    width: 33.33333%;
+    background: #f6f6f6;
+    left: 0;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+}
+.btn_content{
+    position: fixed;
+    right: 0;
+    padding: 10px;
+    height:100%;
+    width: 66.66666%;
+}
