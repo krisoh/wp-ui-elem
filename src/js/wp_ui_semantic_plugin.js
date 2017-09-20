@@ -21,6 +21,9 @@
           case "card":
             openCardShortcode(editor)
             break;
+		  case "image":
+            openCardShortcode(editor)
+            break;
         }
 
       },
@@ -28,7 +31,8 @@
         { text: 'Button', value: 'button' },
         { text: 'Callout', value: 'callout' },
         { text: 'Section', value: 'section' },
-        { text: 'Card', value: 'card' }
+        { text: 'Card', value: 'card' },
+		{ text: 'Image', value: 'image' }
       ]
 
     });
@@ -86,7 +90,7 @@
       ],
       onsubmit: function(e) {
         var  img= editor.settings.addImage;
-        if(img==undefined){
+        if(img==undefined || img==""){
           img={'url':"", "link": ""}
         }
         // Insert content when the window form is submitted
@@ -115,7 +119,7 @@
       onsubmit: function(e) {
         var img= editor.settings.addImage;
 
-        if(img==undefined){
+        if(img==undefined || img==""){
           img={'url':"", "link": ""}
         }
         // Insert content when the window form is submitted
@@ -126,6 +130,65 @@
     });
 
   }
+  
+  function openCardShortcode(editor){
+
+    editor.windowManager.open({
+      title: 'App-Arena Image',
+      body: [
+        {type:'button', name: 'image',label: 'Image', value: "test" , text:"Select Image",onclick: function(){uploadImage(editor);} },
+        {type: 'textbox', name: 'img_href', label: 'Link To'},
+        {type:'listbox', name: 'size',label: 'Size', values:[
+		  {text: 'Original', value: ''},
+          {text: 'Mini', value: 'mini'},
+          {text: 'Tiny', value: 'tiny'},
+          {text: 'Small', value: 'small'},
+          {text: 'Medium', value: 'medium'},
+          {text: 'Large', value: 'large'},
+		  {text: 'Big', value: 'big'},
+		  {text: 'Huge', value: 'huge'},
+		  {text: 'Massive', value: 'massive'}
+        ] },
+		{type:'listbox', name: 'variation',label: 'Variation', values:[
+		  {text: 'None', value: ''},
+          {text: 'Avatar', value: 'avatar'},
+          {text: 'Fluid', value: 'fluid'},
+          {text: 'Top Aligned', value: 'top aligned'},
+          {text: 'Middle Aligned', value: 'middle aligned'},
+          {text: 'Bottom Aligned', value: 'bottom aligned'},
+		  {text: 'Centered', value: 'centered'},
+		  {text: 'Spaced', value: 'spaced'},
+		  {text: 'Left Floated', value: 'left floated'},
+		  {text: 'Right Floated', value: 'right floated'}
+        ] },
+		{type:'listbox', name: 'shape',label: 'Shape', values:[
+		  {text: 'Original', value: ''},
+          {text: 'Rounded', value: 'rounded'},
+          {text: 'Circular', value: 'circular'}
+        ] },
+        {type: 'checkbox', name: 'bordered', label: 'Bordered'}
+      ],
+      onsubmit: function(e) {
+        var img= editor.settings.addImage;
+
+		if(img==undefined || img==""){
+          img={'url':"", "link": ""}
+        }
+        // Insert content when the window form is submitted
+        const shortcode='[aa_image img_url="'+img.url +'" ' + 
+						'img_href="'+ e.data.img_href +'" ' +
+						'size="'+ e.data.size +'" ' +
+						'variation="'+ e.data.variation +'" ' +
+						'shape="'+ e.data.shape +'" ' +
+						'bordered="'+ e.data.bordered +'" ' +
+						'][/aa_image]'
+        editor.insertContent(shortcode);
+        editor.settings.addImage="";
+      }
+    });
+
+  }
+  
   function uploadImage(e) {
     var image_frame = wp.media({
       title: 'Select Media',
